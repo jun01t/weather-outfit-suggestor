@@ -5,7 +5,7 @@
         v-model="searchQuery"
         @keyup.enter="handleSearch"
         type="text"
-        placeholder="都市名を入力 (例: 東京, Tokyo, Osaka)"
+        placeholder="都市名を入力 (例: 東京、大阪、札幌)"
         class="flex-1 px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
       />
       <button

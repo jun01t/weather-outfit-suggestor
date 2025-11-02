@@ -5,15 +5,115 @@ import axios from 'axios';
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY || 'demo';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
-// デバッグ用: APIキーの確認
-console.log('API_KEY:', API_KEY ? '設定済み' : '未設定');
-console.log('API_KEY length:', API_KEY ? API_KEY.length : 0);
+// 日本語都市名をローマ字に変換するマッピング
+const cityNameMapping = {
+  '東京': 'Tokyo,JP',
+  'とうきょう': 'Tokyo,JP',
+  '大阪': 'Osaka,JP',
+  'おおさか': 'Osaka,JP',
+  '札幌': 'Sapporo,JP',
+  'さっぽろ': 'Sapporo,JP',
+  '福岡': 'Fukuoka,JP',
+  'ふくおか': 'Fukuoka,JP',
+  '名古屋': 'Nagoya,JP',
+  'なごや': 'Nagoya,JP',
+  '横浜': 'Yokohama,JP',
+  'よこはま': 'Yokohama,JP',
+  '京都': 'Kyoto,JP',
+  'きょうと': 'Kyoto,JP',
+  '神戸': 'Kobe,JP',
+  'こうべ': 'Kobe,JP',
+  '仙台': 'Sendai,JP',
+  'せんだい': 'Sendai,JP',
+  '広島': 'Hiroshima,JP',
+  'ひろしま': 'Hiroshima,JP',
+  '北九州': 'Kitakyushu,JP',
+  'きたきゅうしゅう': 'Kitakyushu,JP',
+  '千葉': 'Chiba,JP',
+  'ちば': 'Chiba,JP',
+  '埼玉': 'Saitama,JP',
+  'さいたま': 'Saitama,JP',
+  '新潟': 'Niigata,JP',
+  'にいがた': 'Niigata,JP',
+  '静岡': 'Shizuoka,JP',
+  'しずおか': 'Shizuoka,JP',
+  '浜松': 'Hamamatsu,JP',
+  'はままつ': 'Hamamatsu,JP',
+  '岡山': 'Okayama,JP',
+  'おかやま': 'Okayama,JP',
+  '熊本': 'Kumamoto,JP',
+  'くまもと': 'Kumamoto,JP',
+  '鹿児島': 'Kagoshima,JP',
+  'かごしま': 'Kagoshima,JP',
+  '那覇': 'Naha,JP',
+  'なは': 'Naha,JP',
+  '青森': 'Aomori,JP',
+  'あおもり': 'Aomori,JP',
+  '盛岡': 'Morioka,JP',
+  'もりおか': 'Morioka,JP',
+  '秋田': 'Akita,JP',
+  'あきた': 'Akita,JP',
+  '山形': 'Yamagata,JP',
+  'やまがた': 'Yamagata,JP',
+  '福島': 'Fukushima,JP',
+  'ふくしま': 'Fukushima,JP',
+  '宇都宮': 'Utsunomiya,JP',
+  'うつのみや': 'Utsunomiya,JP',
+  '前橋': 'Maebashi,JP',
+  'まえばし': 'Maebashi,JP',
+  '高崎': 'Takasaki,JP',
+  'たかさき': 'Takasaki,JP',
+  '川崎': 'Kawasaki,JP',
+  'かわさき': 'Kawasaki,JP',
+  '相模原': 'Sagamihara,JP',
+  'さがみはら': 'Sagamihara,JP',
+  '長野': 'Nagano,JP',
+  'ながの': 'Nagano,JP',
+  '松本': 'Matsumoto,JP',
+  'まつもと': 'Matsumoto,JP',
+  '富山': 'Toyama,JP',
+  'とやま': 'Toyama,JP',
+  '金沢': 'Kanazawa,JP',
+  'かなざわ': 'Kanazawa,JP',
+  '福井': 'Fukui,JP',
+  'ふくい': 'Fukui,JP',
+  '甲府': 'Kofu,JP',
+  'こうふ': 'Kofu,JP',
+  '松江': 'Matsue,JP',
+  'まつえ': 'Matsue,JP',
+  '鳥取': 'Tottori,JP',
+  'とっとり': 'Tottori,JP',
+  '山口': 'Yamaguchi,JP',
+  'やまぐち': 'Yamaguchi,JP',
+  '佐賀': 'Saga,JP',
+  'さが': 'Saga,JP',
+  '長崎': 'Nagasaki,JP',
+  'ながさき': 'Nagasaki,JP',
+  '大分': 'Oita,JP',
+  'おおいた': 'Oita,JP',
+  '宮崎': 'Miyazaki,JP',
+  'みやざき': 'Miyazaki,JP',
+  '高松': 'Takamatsu,JP',
+  'たかまつ': 'Takamatsu,JP',
+  '徳島': 'Tokushima,JP',
+  'とくしま': 'Tokushima,JP',
+  '高知': 'Kochi,JP',
+  'こうち': 'Kochi,JP'
+};
+
+// 都市名をローマ字に変換
+const translateCityName = (cityName) => {
+  return cityNameMapping[cityName] || cityName;
+};
 
 export const getWeatherByCity = async (cityName) => {
   try {
+    // 日本語都市名をローマ字に変換
+    const translatedCityName = translateCityName(cityName);
+    
     const response = await axios.get(`${BASE_URL}/weather`, {
       params: {
-        q: cityName,
+        q: translatedCityName,
         appid: API_KEY,
         units: 'metric', // 摂氏で取得
         lang: 'ja' // 日本語で取得
