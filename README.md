@@ -1,0 +1,104 @@
+# 🌤️ 天気コーディネーター
+
+気温に合わせた服装のコーディネートを提案するWebアプリケーションです。
+
+## ✨ 機能
+
+- 🌍 世界中の都市の天気情報を取得
+- 📍 現在地の天気情報を取得（位置情報対応）
+- 👔 気温に基づいた服装のコーディネート提案
+- 💡 快適に過ごすためのアドバイス
+- 📱 レスポンシブデザイン対応
+
+## 🚀 セットアップ
+
+### 1. 依存パッケージのインストール
+
+```bash
+npm install
+```
+
+### 2. OpenWeatherMap APIキーの取得（オプション）
+
+1. [OpenWeatherMap](https://openweathermap.org/api) にアクセス
+2. 無料アカウントを作成
+3. APIキーを取得
+
+### 3. 環境変数の設定
+
+`.env.example`を`.env`にコピーして、APIキーを設定：
+
+```bash
+cp .env.example .env
+```
+
+`.env`ファイルを開いて、取得したAPIキーを設定：
+
+```
+VITE_WEATHER_API_KEY=your_api_key_here
+```
+
+**注意**: APIキーを設定しない場合、デモモードで動作します（一部の都市のサンプルデータが表示されます）。
+
+### 4. 開発サーバーの起動
+
+```bash
+npm run dev
+```
+
+ブラウザで `http://localhost:5173` にアクセスしてください。
+
+## 🎨 技術スタック
+
+- **フレームワーク**: Vue 3 (Composition API)
+- **ビルドツール**: Vite
+- **スタイリング**: Tailwind CSS
+- **HTTPクライアント**: Axios
+- **天気API**: OpenWeatherMap API
+
+## 📦 プロジェクト構造
+
+```
+weather-outfit-suggestor/
+├── src/
+│   ├── components/
+│   │   ├── CitySearch.vue       # 都市検索コンポーネント
+│   │   ├── WeatherDisplay.vue   # 天気表示コンポーネント
+│   │   └── OutfitSuggestion.vue # 服装提案コンポーネント
+│   ├── services/
+│   │   └── weatherService.js   # 天気API統合
+│   ├── utils/
+│   │   └── outfitSuggestions.js # 服装提案ロジック
+│   ├── App.vue                 # メインコンポーネント
+│   └── main.js                 # エントリーポイント
+├── .env.example                 # 環境変数のサンプル
+└── README.md                    # このファイル
+```
+
+## 🌡️ 気温別の服装提案
+
+- **30°C以上**: 猛暑対策（タンクトップ、ショートパンツなど）
+- **25-29°C**: 夏スタイル（Tシャツ、短パンなど）
+- **20-24°C**: 春・初夏スタイル（長袖Tシャツ、ジーンズなど）
+- **15-19°C**: 春・秋スタイル（カーディガン、ジャケットなど）
+- **10-14°C**: 秋・冬の初め（セーター、コートなど）
+- **5-9°C**: 冬スタイル（ダウンコート、手袋など）
+- **5°C未満**: 厳寒対策（厚手のセーター、ヒートテックなど）
+
+## 🛠️ ビルド
+
+本番用のビルド：
+
+```bash
+npm run build
+```
+
+ビルドのプレビュー：
+
+```bash
+npm run preview
+```
+
+## 📝 ライセンス
+
+MIT
