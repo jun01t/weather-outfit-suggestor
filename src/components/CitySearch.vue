@@ -116,7 +116,7 @@ const handleLocationSearch = () => {
       gettingLocation.value = false;
     },
     {
-      timeout: 10000,
+      timeout: 30000,
       maximumAge: 60000,
       enableHighAccuracy: false
     }
