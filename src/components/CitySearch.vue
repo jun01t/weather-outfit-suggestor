@@ -101,8 +101,24 @@ const handleLocationSearch = () => {
       gettingLocation.value = false;
     },
     (err) => {
-      error.value = '位置情報の取得に失敗しました。';
+      console.error('Geolocation error:', err);
+      let errorMessage = '位置情報の取得に失敗しました。';
+      
+      if (err.code === 1) {
+        errorMessage = '位置情報の取得が拒否されました。ブラウザの設定を確認してください。';
+      } else if (err.code === 2) {
+        errorMessage = '位置情報が利用できません。ネットワーク接続を確認してください。';
+      } else if (err.code === 3) {
+        errorMessage = '位置情報の取得がタイムアウトしました。再度お試しください。';
+      }
+      
+      error.value = errorMessage;
       gettingLocation.value = false;
+    },
+    {
+      timeout: 10000,
+      maximumAge: 60000,
+      enableHighAccuracy: false
     }
   );
 };
