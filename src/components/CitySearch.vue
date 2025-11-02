@@ -22,14 +22,14 @@
       v-if="allowLocation"
       @click="handleLocationSearch"
       :disabled="loading || gettingLocation"
-      class="mt-4 w-full px-4 py-2 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center justify-center gap-2"
+      class="mt-4 w-full px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 text-white font-medium rounded-lg hover:from-green-600 hover:to-teal-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
       </svg>
       <span v-if="gettingLocation">位置情報取得中...</span>
-      <span v-else>現在地の天気を取得</span>
+      <span v-else>📍 現在地の天気を取得</span>
     </button>
     
     <div v-if="error" class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
