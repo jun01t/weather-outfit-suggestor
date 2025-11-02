@@ -5,6 +5,10 @@ import axios from 'axios';
 const API_KEY = import.meta.env.VITE_WEATHER_API_KEY || 'demo';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
+// デバッグ用: APIキーの確認
+console.log('API_KEY:', API_KEY ? '設定済み' : '未設定');
+console.log('API_KEY length:', API_KEY ? API_KEY.length : 0);
+
 export const getWeatherByCity = async (cityName) => {
   try {
     const response = await axios.get(`${BASE_URL}/weather`, {
